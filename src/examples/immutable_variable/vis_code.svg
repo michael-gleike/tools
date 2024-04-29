@@ -169,9 +169,9 @@ object.code_panel {
     </g>
 
     <g id="code">
-        <text class="code" x="20" y="90"> <tspan fill="#AAA">1 	</tspan>fn main() { </text>
-        <text class="code" x="20" y="120"> <tspan fill="#AAA">2 	</tspan>    let <tspan data-hash="1">x</tspan> = 5; </text>
-        <text class="code" x="20" y="150"> <tspan fill="#AAA">3 	</tspan>} </text>
+        <text class="code" x="20" y="90"> <tspan fill="#AAA">1</tspan>	fn main() { </text>
+        <text class="code" x="20" y="120"> <tspan fill="#AAA">2</tspan>	    let <tspan data-hash="1">x</tspan> = 5; </text>
+        <text class="code" x="20" y="150"> <tspan fill="#AAA">3</tspan>	} </text>
     </g>
 
    
