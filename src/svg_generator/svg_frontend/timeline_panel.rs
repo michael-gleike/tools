@@ -1,6 +1,7 @@
 extern crate handlebars;
 
 use crate::data::{StructsInfo, VisualizationData, Visualizable, ExternalEvent, State, ResourceAccessPoint, Event, LINE_SPACE};
+#[allow(unused_imports)]
 use crate::svg_frontend::line_styles::{RefDataLine, RefValueLine, OwnerLine};
 use handlebars::Handlebars;
 use std::collections::BTreeMap;

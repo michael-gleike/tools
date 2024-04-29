@@ -21,6 +21,7 @@ struct SvgData {
     css: String,
     code: String,
     diagram: String,
+    c_width: i32,
     tl_id: String,
     tl_width: i32,
     height: i32,
@@ -116,6 +117,7 @@ pub fn render_svg(
         code_panel_string = output;
         num_lines = line_of_code;
     }
+    println!("{}, {}", max_x_space ,(max_x_space as f32 * 8.5) as i32);
 
     // data for tl panel
     let (timeline_panel_string, max_width) = timeline_panel::render_timeline_panel(visualization_data);
@@ -125,6 +127,7 @@ pub fn render_svg(
         css: css_string,
         code: code_panel_string,
         diagram: timeline_panel_string,
+        c_width: (max_x_space as f32 * 8.5) as i32,
         tl_id: "tl_".to_owned() + input_path,
         tl_width: cmp::max(max_width, 200),
         height: (num_lines * LINE_SPACE as i32 + 80) + 50,
