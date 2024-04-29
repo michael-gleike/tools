@@ -1,8 +1,8 @@
 <svg width="380px" height="490px" 
         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-        id="tl_examples/struct_string/input/">
+        id="tl_examples\struct_string\input/">
 
-    <desc>examples/struct_string/input/</desc>
+    <desc>examples\struct_string\input/</desc>
 
     <defs>
         <style type="text/css">
@@ -89,9 +89,9 @@ text.label {
 .flex-container {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
     flex-wrap: nowrap;
     flex-shrink: 0;
+    justify-content: center;
 }
 
 object.tl_panel {

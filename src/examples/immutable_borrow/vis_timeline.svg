@@ -1,8 +1,8 @@
 <svg width="260px" height="430px" 
         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-        id="tl_examples/immutable_borrow/input/">
+        id="tl_examples\immutable_borrow\input/">
 
-    <desc>examples/immutable_borrow/input/</desc>
+    <desc>examples\immutable_borrow\input/</desc>
 
     <defs>
         <style type="text/css">
@@ -89,9 +89,9 @@ text.label {
 .flex-container {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
     flex-wrap: nowrap;
     flex-shrink: 0;
+    justify-content: center;
 }
 
 object.tl_panel {
