@@ -51,6 +51,7 @@ declare -a targetExamples=(
     "struct_rect2"
     "struct_string"
     "extra_credit"
+    "beispiel1"
 )
 
 EX="../src/examples"
