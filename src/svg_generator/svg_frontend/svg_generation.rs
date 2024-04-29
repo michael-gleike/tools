@@ -127,7 +127,7 @@ pub fn render_svg(
         css: css_string,
         code: code_panel_string,
         diagram: timeline_panel_string,
-        c_width: (max_x_space as f32 * 8.5) as i32,
+        c_width: (max_x_space * 9) as i32,
         tl_id: "tl_".to_owned() + input_path,
         tl_width: cmp::max(max_width, 200),
         height: (num_lines * LINE_SPACE as i32 + 80) + 50,

@@ -42,7 +42,7 @@ pub fn render_code_panel(
             data.insert("Y_VAL".to_string(), y.to_string());
             /* automatically add line numbers to code */
             let fmt_line = format!(
-                "<tspan fill=\"#AAA\">{}  </tspan>{}",
+                "<tspan fill=\"#AAA\">{} \t</tspan>{}",
                 line_of_code, line_string
             );
             data.insert("LINE".to_string(), fmt_line);

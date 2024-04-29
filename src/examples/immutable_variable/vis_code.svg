@@ -1,7 +1,8 @@
-<svg height="250px" 
+
+<svg width="126px" height="auto"
         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-    <desc>examples/immutable_variable/input/</desc>
+    <desc>examples\immutable_variable\input/</desc>
 
     <defs>
         <style type="text/css">
@@ -88,9 +89,9 @@ text.label {
 .flex-container {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
     flex-wrap: nowrap;
     flex-shrink: 0;
+    justify-content: center;
 }
 
 object.tl_panel {
@@ -168,9 +169,9 @@ object.code_panel {
     </g>
 
     <g id="code">
-        <text class="code" x="20" y="90"> <tspan fill="#AAA">1  </tspan>fn main() { </text>
-        <text class="code" x="20" y="120"> <tspan fill="#AAA">2  </tspan>    let <tspan data-hash="1">x</tspan> = 5; </text>
-        <text class="code" x="20" y="150"> <tspan fill="#AAA">3  </tspan>} </text>
+        <text class="code" x="20" y="90"> <tspan fill="#AAA">1 	</tspan>fn main() { </text>
+        <text class="code" x="20" y="120"> <tspan fill="#AAA">2 	</tspan>    let <tspan data-hash="1">x</tspan> = 5; </text>
+        <text class="code" x="20" y="150"> <tspan fill="#AAA">3 	</tspan>} </text>
     </g>
 
    
