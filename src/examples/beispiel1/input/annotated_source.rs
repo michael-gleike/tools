@@ -16,6 +16,7 @@ fn main(){
     <tspan class="fn" data-hash="0" hash="9">println!</tspan>("s3 -> {}", <tspan data-hash="6">s3</tspan>);
 } 
 
+
 fn <tspan class="fn" data-hash="0" hash="11">take_ownership</tspan>(<tspan data-hash="7">string1</tspan>: String){ 
     <tspan class="fn" data-hash="0" hash="9">println!</tspan>("take_ownership string -> {}", <tspan data-hash="7">string1</tspan>);
 } 

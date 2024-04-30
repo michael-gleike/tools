@@ -187,14 +187,15 @@ object.code_panel {
         <text class="code" x="20" y="540"> <tspan fill="#AAA">16</tspan>	    <tspan class="fn" data-hash="0" hash="9">println!</tspan>("s3 -> {}", <tspan data-hash="6">s3</tspan>); </text>
         <text class="code" x="20" y="570"> <tspan fill="#AAA">17</tspan>	}  </text>
         <text class="code" x="20" y="600"> <tspan fill="#AAA">18</tspan>	 </text>
-        <text class="code" x="20" y="630"> <tspan fill="#AAA">19</tspan>	fn <tspan class="fn" data-hash="0" hash="11">take_ownership</tspan>(<tspan data-hash="7">string1</tspan>: String){  </text>
-        <text class="code" x="20" y="660"> <tspan fill="#AAA">20</tspan>	    <tspan class="fn" data-hash="0" hash="9">println!</tspan>("take_ownership string -> {}", <tspan data-hash="7">string1</tspan>); </text>
-        <text class="code" x="20" y="690"> <tspan fill="#AAA">21</tspan>	}  </text>
-        <text class="code" x="20" y="720"> <tspan fill="#AAA">22</tspan>	 </text>
-        <text class="code" x="20" y="750"> <tspan fill="#AAA">23</tspan>	fn <tspan class="fn" data-hash="0" hash="12">take_ownership_and_give_Back</tspan>(<tspan data-hash="8">string2</tspan>: String) -> String { </text>
-        <text class="code" x="20" y="780"> <tspan fill="#AAA">24</tspan>	    <tspan class="fn" data-hash="0" hash="9">println!</tspan>("take_ownership_and_give_back string -> {}", <tspan data-hash="8">string2</tspan>); </text>
-        <text class="code" x="20" y="810"> <tspan fill="#AAA">25</tspan>	    <tspan data-hash="8">string2</tspan>  </text>
-        <text class="code" x="20" y="840"> <tspan fill="#AAA">26</tspan>	} </text>
+        <text class="code" x="20" y="630"> <tspan fill="#AAA">19</tspan>	 </text>
+        <text class="code" x="20" y="660"> <tspan fill="#AAA">20</tspan>	fn <tspan class="fn" data-hash="0" hash="11">take_ownership</tspan>(<tspan data-hash="7">string1</tspan>: String){  </text>
+        <text class="code" x="20" y="690"> <tspan fill="#AAA">21</tspan>	    <tspan class="fn" data-hash="0" hash="9">println!</tspan>("take_ownership string -> {}", <tspan data-hash="7">string1</tspan>); </text>
+        <text class="code" x="20" y="720"> <tspan fill="#AAA">22</tspan>	}  </text>
+        <text class="code" x="20" y="750"> <tspan fill="#AAA">23</tspan>	 </text>
+        <text class="code" x="20" y="780"> <tspan fill="#AAA">24</tspan>	fn <tspan class="fn" data-hash="0" hash="12">take_ownership_and_give_Back</tspan>(<tspan data-hash="8">string2</tspan>: String) -> String { </text>
+        <text class="code" x="20" y="810"> <tspan fill="#AAA">25</tspan>	    <tspan class="fn" data-hash="0" hash="9">println!</tspan>("take_ownership_and_give_back string -> {}", <tspan data-hash="8">string2</tspan>); </text>
+        <text class="code" x="20" y="840"> <tspan fill="#AAA">26</tspan>	    <tspan data-hash="8">string2</tspan>  </text>
+        <text class="code" x="20" y="870"> <tspan fill="#AAA">27</tspan>	} </text>
     </g>
 
    
