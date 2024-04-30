@@ -1,22 +1,23 @@
 # Seminar RustViz
-
 *RustViz* ist ein Werkzeug, das interaktive Visualisierungen von einfachen Rust-Programmen erzeugt, um den Benutzern zu helfen, den Rust [Lifetime and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) Mechanismus besser zu verstehen.
 
 RustViz ist ein Projekt des [Future of Programming Lab](http://fplab.mplse.org/) an der Universität von Michigan.
 
 Diese Seminararbeit beschäftigt sich mit der Vorstellung des Tools und einer genauen Beleuchtung der [Ownership Types](https://github.com/PhilKrau/OwnershipTypesRust).
+<br>
 
 ## Was macht RustViz?
-
 *RustViz* erzeugt [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG)-Dateien durch vom Benutzer annotierten Source Code mit grafischen Indikatoren, die mit [mdbook](https://github.com/rust-lang/mdBook) integriert werden können, um interaktive Visualisierungen von Eigentums- und Ausleihvorgängen in einem Rust-Programm zu erstellen. Hier ist eine Beispielansicht, wie eine Visualisierung aussehen kann:
 ![alt tag](https://github.com/michael-gleike/rustviz/blob/main/src/svg_generator/example.png)
 
 Näheres dazu ist nochmal in dem zugehörigen [VL/HCC 2022 paper](https://web.eecs.umich.edu/~comar/rustviz-vlhcc22.pdf) beschrieben.
+<br>
 
 ## Voraussetzungen
 RustViz benötigt eine Instalation von Rust zusammen mit Cargo und mdBook.
 1. [Cargo](https://doc.rust-lang.org/cargo/index.html) ist der Rust-Paketmanager. Cargo lädt die Abhängigkeiten der Rust-Pakets herunter, kompiliert die Pakete, erstellt verteilbare Pakete und lädt sie auf crates.io, die Paketregistrierung der Rust-Community, hoch.
 2. [mdBook](https://github.com/rust-lang/mdBook) ist ein Kommandozeilenwerkzeug zum Erstellen von Büchern mit Markdown. Es ist ideal für die Erstellung von Produkt- oder API-Dokumentation, Tutorials, Kursmaterialien oder alles, was eine saubere, leicht navigierbare und anpassbare Präsentation erfordert. Näheres dazu ist in der [Dokumentation](https://rust-lang.github.io/mdBook/index.html) von mdBook zu finden.
+<br>
 
 ## Benutzung
 Nach der Instalation der Abhängigkeiten können die vorgefertigten Beispiele aus dem [/src/examples](src/examples) Ordner durch das Ausführen eines Scripts aus dem Ordner [/rustviz_mdbook](rustviz_mdbook) die Visaulisierungen erzeugt werden.
@@ -31,7 +32,7 @@ Windows-Cmd:
 ```
 
 Nach dem Ausführen des entsprechenden Befehls lässt sich dann die erzeugte Visualisierung unter http://localhost:8000/ ansehen.
-
+<br>
 
 ## Ordnerstruktur der Beispiele
 ```
@@ -56,7 +57,7 @@ beispiel
 
 
 - ``vis_timeline.svg`` ist die aus der ``main.rs`` generierte Timeline der Events.
-
+<br>
 
 ## Annotations Syntax der ``annotated_source.rs``
 ```rust
@@ -77,7 +78,7 @@ fn main() {
    5. ...
    6. ``"9"`` ist der momentan letzte vorgesehen ``data-hash``
 4. ``hash="4"`` wird nur bei ``data-hash="0"`` benötigt, sonst ist ``hash`` implizit der selbe wert wie ``data-hash``. Der angegebene Wert bestimmt dabei die Position in der Variablen Definition in der ``main.rs``. Variablen haben dabei immer die kleineren Werte als Funktionen und die Reihenfolge in der Variablen Definition bestimmt dabei auch die Reihenfolge in der Graphen Visualisierung. Der ``data-hash`` bestimmt dabei aber lediglich die Farbe des Elements der entsprechenden Nummer. Somit kann es durch ein Inkonsistenz zwischen dem ``data-hash`` und der Position in der Variablen Definition dazu kommen, dass eine Variable im Code und im Graphen zwei verschiedene Farben haben kann.
-
+<br>
 
 ## Syntax der ``main.rs``
 ### 1. Variablen Definition
@@ -110,7 +111,6 @@ Function String::from();
 > <li>alle Definitionen <strong><em>müssen</em></strong> durch ein einzelnes Semikolon getrennt werden</li>
 > <li>jedes Feld innerhalb einer ResourceAccessPoint-Definition <strong><em>muss</em></strong> durch ein Leerzeichen getrennt sein</li>
 > </ol>
-<br>
 
 ### 2. Events
 Events werden in strukturierten Kommentaren spezifiziert. Dabei wird jedes Event in der Zeile, in der es auftritt, und innerhalb der Begrenzungszeichen ``!{`` und ``}`` definiert.
@@ -140,11 +140,13 @@ Format: <event_name>(<from>-><to>)
 | `GoOutOfScope(a)`                | Beendet die lexikalische Lebensdauer der Variable `a`.                                                                                                                                                                                                                       |
 | `InitOwnerParam(a)`              | Initialisiert den Parameter `a` einer Funktion, der Owner der Ressource ist. Bsp.: `fn(a: String) {..}`<br>                                                                                                                                                                  |
 | `InitRefParam(a)`                | Initialisiert den Parameter `a` einer Funktion, der eine Referenz auf die Ressource ist. Bsp.: `fn(a: &String) {..}`<br>                                                                                                                                                     |
+<br>
 
 ## Einschränkungen der Visualisierungen
 - Verzweigungslogik
 - Looping
 - explizite Lebensdaueranmerkung
+<br>
 
 ## Probleme
 Es kommt immer wieder zu inkonsitentem Verhalten und die Annotationen werden nicht automatisiert angelegt. Dies führt dazu, dass man sich bereits mit der Thematik des Ownerships und Borrowing auskennen muss um diese visualisieren zu können.
