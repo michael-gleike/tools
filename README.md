@@ -1,81 +1,88 @@
-# RustViz
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+# Seminar RustViz
 
-*RustViz* is a tool that generates interactive visualizations from simple Rust programs to assist users in better understanding the Rust [Lifetime and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) mechanism.
+*RustViz* ist ein Werkzeug, das interaktive Visualisierungen von einfachen Rust-Programmen erzeugt, um den Benutzern zu helfen, den Rust [Lifetime and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) Mechanismus besser zu verstehen.
 
-RustViz is a project of the [Future of Programming Lab](http://fplab.mplse.org/) at the University of Michigan.
+RustViz ist ein Projekt des [Future of Programming Lab](http://fplab.mplse.org/) an der Universität von Michigan.
 
-## What does it look like?
+Diese Seminararbeit beschäftigt sich mit der Vorstellung des Tools und einer genauen Beleuchtung der [Ownership Types](https://github.com/PhilKrau/OwnershipTypesRust).
 
-*RustViz* generates [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG) files with graphical indicators that integrate with [mdbook](https://github.com/rust-lang/mdBook) to render interactive visualizations of ownership and borrowing related events in a Rust program. Here's a sample view of what a visualization can look like:
+## Was macht RustViz?
 
+*RustViz* erzeugt [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG)-Dateien durch vom Benutzer annotierten Source Code mit grafischen Indikatoren, die mit [mdbook](https://github.com/rust-lang/mdBook) integriert werden können, um interaktive Visualisierungen von Eigentums- und Ausleihvorgängen in einem Rust-Programm zu erstellen. Hier ist eine Beispielansicht, wie eine Visualisierung aussehen kann:
 ![alt tag](https://github.com/rustviz/rustviz/blob/master/src/svg_generator/example.png)
 
-You can read more about it in [our VL/HCC 2022 paper](https://web.eecs.umich.edu/~comar/rustviz-vlhcc22.pdf). Note that the section on generating visualizations is out of date, see below.
+Näheres dazu ist nochmal in dem zugehörigen [VL/HCC 2022 paper](https://web.eecs.umich.edu/~comar/rustviz-vlhcc22.pdf) beschrieben.
 
-## Usage
-*RustViz* is capable of generating visualizations for simple Rust programs (albeit with certain limitations) that have been annotated by the user. We are not currently attempting to generate visualizations automatically. In this section, we'll showcase how to generate SVG renderings of examples provided by us.
+## Voraussetzungen
+RustViz benötigt eine Instalation von Rust zusammen mit Cargo und mdBook.
+1. [Cargo](https://doc.rust-lang.org/cargo/index.html) ist der Rust-Paketmanager. Cargo lädt die Abhängigkeiten der Rust-Pakets herunter, kompiliert die Pakete, erstellt verteilbare Pakete und lädt sie auf crates.io, die Paketregistrierung der Rust-Community, hoch.
+2. [mdBook](https://github.com/rust-lang/mdBook) ist ein Kommandozeilenwerkzeug zum Erstellen von Büchern mit Markdown. Es ist ideal für die Erstellung von Produkt- oder API-Dokumentation, Tutorials, Kursmaterialien oder alles, was eine saubere, leicht navigierbare und anpassbare Präsentation erfordert. Näheres dazu ist in der [Dokumentation](https://rust-lang.github.io/mdBook/index.html) von mdBook zu finden.
 
-*RustViz* requires [Rust](https://www.rust-lang.org/), [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) and [mdbook](https://github.com/rust-lang/mdBook) to be installed. Once you have installed all the above prerequisites, direct into [/rustviz_mdbook](rustviz_mdbook) and run the script:
+## Benutzung
+Nach der Instalation der Abhängigkeiten können die vorgefertigten Beispiele aus dem [/src/examples](src/examples) Ordner durch das Ausführen eines Scripts aus dem Ordner [/rustviz_mdbook](rustviz_mdbook) die Visaulisierungen erzeugt werden.
+
+Linux-Shell:
 ```shell
 ~/rustviz/rustviz_mdbook$ ./view_examples.sh
 ```
-You may have an output similar to this:
+Windows-Cmd:
 ```shell
-Generating visualizations for the following examples:
-building copy...
-building hatra1...
-building hatra2...
-building func_take_ownership...
-building func_take_return_ownership...
-2021-01-19 12:36:13 [INFO] (mdbook::book): Book building has started
-2021-01-19 12:36:13 [INFO] (mdbook::book): Running the html backend
-Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+~/rustviz/rustviz_mdbook> ./view_examples.bat
 ```
-If you observed this output, then you have successfully generated the Rust visualization examples! Now open your browser and navigate to [http://localhost:8000/](http://localhost:8000/). You should be able to view the examples individually by selecting them from the left side bar. To view the visualization, click the toggle button on the top right corner of the code block.
 
-Great, this is how you can generate and view visualizations created using *RustViz*. Now let's create one from scratch!
+Nach dem Ausführen des entsprechenden Befehls lässt sich dann die erzeugte Visualisierung unter http://localhost:8000/ ansehen.
 
-## Step-By-Step Guide
-In this section, we'll dive into creating an example, [string_from_move_print](src/examples/string_from_move_print). Note that all visualization examples are placed under [`rustviz/src/examples/`](src/examples) directory and you can create a new directory in [`rustviz/src/examples/`](src/examples) of your own.
-First, take note of the file structure we'll need to run the example:
-```shell
-string_from_move_print
+
+## Ordnerstruktur der Beispiele
+```
+beispiel
 ├── input
 │   └── annotated_source.rs
-└── source.rs
+├── main.rs
+├── source.rs
+├── vis_code.svg
+└── vis_timeline.svg
 ```
-[source.rs](src/examples/string_from_move_print/source.rs) contains the untouched source code we wish to render into an image:
-```rust
-fn main() {
-    let x = String::from("hello");
-    let y = x;
-    println!("{}", y);
-}
-```
-In this example, `String::from()` moves a string (`"hello"`) to `x`, then `x`'s resource is moved to `y`. Subsequently, `println!()` outputs a message to `io::stdout` without moving the resource.
+- ``source.rs`` ist der nicht annotierte Source Code. In dieser Datei sind keine weiteren Änderungen zu machen.
 
-[annotated_source.rs](src/examples/string_from_move_print/input/annotated_source.rs) contains style annotation to [source.rs](src/examples/string_from_move_print/source.rs) so as to generate SVG for code panel.
+
+- ``annotated_source.rs`` muss manuell erstellt werden und Annotation müssen ebenfalls manuell vorgenommen werden. Diese Datei dient als Grundlage der Darstellung des stilisierten Codes. Somit muss man auf die Formatierung oder Kommentare in den anderen Dateien nicht achten. Die [Syntax](#annotations-syntax-der-annotated_sourcers) wird gesondert beschrieben. 
+
+
+- ``main.rs`` wird nach dem ersten Ausführen des ``view_examples`` Scripts automatisch erstellt, sofern die Annotationen in ``annotated_source.rs`` bereits vorgenommen wurden. Dabei wird ein Block mit Variablen Definitionen erzeugt, die eigentlichen Events müssen aber Händisch eingetragen werden. Bei der automatischen Variablen Definition gibt es aber Probleme beim erkennen von StaticRef und MutableRef. Diese werden meist bei der Generierung der Variablen Definition als Owner angegeben, was zu einer falschen Visualisierung führt. Die [Syntax](#syntax-der-mainrs) der Events und Variablen Definition wird gesondert beschrieben.
+
+
+- ``vis_code.svg`` ist der aus der ``annotated_source.rs`` generierte stilisierte Codes.
+
+
+- ``vis_timeline.svg`` ist die aus der ``main.rs`` generierte Timeline der Events.
+
+
+## Annotations Syntax der ``annotated_source.rs``
 ```rust
+// Beispielcode
 fn main() {
     let <tspan data-hash="1">x</tspan> = <tspan class="fn" data-hash="0" hash="3">String::from</tspan>("hello");
     let <tspan data-hash="2">y</tspan> = <tspan data-hash="1">x</tspan>;
     <tspan class="fn" data-hash="0" hash="4">println!</tspan>("{}", <tspan data-hash="2">y</tspan>);
 }
 ```
+1. Annotiert werden nur Variablen und der Funktionsname. Dazu wird das jeweilige Element von ``<tspan></tspan>`` gekapselt.
+2. ``class="fn"``  symbolisiert für ``main.rs`` dass ``String::from`` eine Funktion ist
+3. ``data-hash="0"`` beeinträchtigt die Formatierung
+   1. ``"0"`` formatiert den in ``<tspan></tspan>`` angegebenen code in grau, wird nur bei Funktionen verwendet
+   2. ``"1"`` formatiert in blau
+   3. ``"2"`` formatiert in gelb
+   4. ``"3"`` formatiert in lila
+   5. ...
+   6. ``"9"`` ist der momentan letzte vorgesehen ``data-hash``
+4. ``hash="4"`` wird nur bei ``data-hash="0"`` benötigt, sonst ist ``hash`` implizit der selbe wert wie ``data-hash``. Der angegebene Wert bestimmt dabei die Position in der Variablen Definition in der ``main.rs``. Variablen haben dabei immer die kleineren Werte als Funktionen und die Reihenfolge in der Variablen Definition bestimmt dabei auch die Reihenfolge in der Graphen Visualisierung. Der ``data-hash`` bestimmt dabei aber lediglich die Farbe des Elements der entsprechenden Nummer. Somit kann es durch ein Inkonsistenz zwischen dem ``data-hash`` und der Position in der Variablen Definition dazu kommen, dass eine Variable im Code und im Graphen zwei verschiedene Farben haben kann.
 
-Next, let's familiarize ourselves with the syntax used in [main.rs](src/examples/string_from_move_print/main.rs). The RustViz tool **defines all possible owners, references or input of any memory resource** as a [ResourceAccessPoint](#Data_Structures_and_Function_Specifications). In this case, we consider the function `String::from()` and two variables, `x` and `y`, as Resource Access Points (RAPs). Each of `String::from()` and `x`/`y` corresponds to RAPs `ResourceAccessPoint::Function` and `ResourceAccessPoint::Owner`, respectively.
 
-In [main.rs](src/examples/string_from_move_print/main.rs), we define these RAPs between the `BEGIN` and `END` comments on lines 1 and 2:
-```rust
-/*--- BEGIN Variable Definitions ---
-Owner x; Owner y;
-Function String::from();
---- END Variable Definitions ---*/
-```
-The definition header now can be automatically generated by running the [view_examples.sh](rustviz_mdbook/view_examples.sh) once. If any incorrect information appeared at the generated header, you could manully edit it by refering to the following documentation.
-
-The format for each `ResourceAccessPoint` enum is shown below, where fields preceded by `':'` denote an optional field:
+## Syntax der ``main.rs``
+### 1. Variablen Definition
+Das RustViz-Tool definiert alle möglichen Eigentümer, Referenzen oder Eingaben einer Speicherressource als [ResourceAccessPoint](#Data_Structures_and_Function_Specifications).
+Das Format für jeden `ResourceAccessPoint` ist in dem nachstehend Enum dargestellt, wobei Felder mit vorangestelltem ':' ein optionales Feld bezeichnen:
 ```rust
 ResourceAccessPoint Usage --
     Owner <:mut> <name>
@@ -84,105 +91,61 @@ ResourceAccessPoint Usage --
     Struct <:mut> <name>{<:mut> <member_1>, <:mut> <member_2>, ... }
     Function <name>
 ```
-Alternatively, some code `let mut a = 5;` and `let b = &a;` would correspond to `Owner mut a` and `StaticRef b`, respectively.
-An immutable instance of some struct with member variables `x` and `mut y`, on the other hand, may be annotated as `Struct a{x, mut y}`.
+Damit wird am Anfang der ``main.rs`` in einem Blockkommentar  die Variablen Definition vorgenommen.
 
-> It is important to note:
+```rust
+// Beispiel
+/*--- BEGIN Variable Definitions ---
+Owner x; 
+Owner mut y;
+StaticRef z;
+Struct a{b, mut c}
+Function String::from();
+--- END Variable Definitions ---*/
+```
+> Dabei ist es wichtig zu beachten:
 > <ol>
-> <li>all definitions <strong><em>must</em></strong> lie between <code>BEGIN</code> and <code>END</code></li>
-> <li>all definitions <strong><em>must</em></strong> be defined in the same order by which they were declared in the source code</li>
-> <li>all definitions <strong><em>must</em></strong> be separated by a singular semicolon</li>
-> <li>each field within a RAP definition <strong><em>must</em></strong> be separated by a whitespace</li>
+> <li>alle Definitionen <strong><em>müssen</em></strong> zwischen <code>BEGIN</code> und code>END</code> liegen</li>
+> <li>alle Definitionen <strong><em>müssen</em></strong> in der <strong><em>gleichen Reihenfolge</em></strong> definiert werden, in der sie durch die Annotationen in der <code>annotated_source.rs</code> durchnummeriert wurden um zu verhindern, dass es Inkonsitenzen zwischen der Formatierung des Codes und der Timeline gibt.</li>
+> <li>alle Definitionen <strong><em>müssen</em></strong> durch ein einzelnes Semikolon getrennt werden</li>
+> <li>jedes Feld innerhalb einer ResourceAccessPoint-Definition <strong><em>muss</em></strong> durch ein Leerzeichen getrennt sein</li>
 > </ol>
 <br>
 
-After running the [view_examples.sh](rustviz_mdbook/view_examples.sh) once we should have the following file structure:
-```shell
-string_from_move_print
-├── input
-│   └── annotated_source.rs
-├── main.rs
-└── source.rs
-```
-
-Next, we annotate the code with the use of `ExternalEvent`s that **describe move, borrow, and drop semantics** of Rust. In [string_from_move_print](src/examples/string_from_move_print), we have four such events:
-1. Move of resource from `String::from()` to `x`
-2. Move of resource from `y` to `x`
-3. Drop of resource binded to `x`
-4. Drop of resource binded to `y`
-
-We can specify Events in structured comments like so:
+### 2. Events
+Events werden in strukturierten Kommentaren spezifiziert. Dabei wird jedes Event in der Zeile, in der es auftritt, und innerhalb der Begrenzungszeichen ``!{`` und ``}`` definiert.
+> Events können innerhalb von Blockkommentaren annotiert werden; der Block muss jedoch in der Zeile beginnen, in der die Events auftreten. Außerdem müssen alle Ereignisse innerhalb einer <code>!{}</code>-Begrenzung durch ein einzelnes Komma getrennt werden und jeweils dem Format entsprechen:
 ```rust
-/* --- BEGIN Variable Definitions ---
-Owner x; Owner y;
-Function String::from();
- --- END Variable Definitions --- */
-fn main() {
-    let x = String::from("hello"); // !{ Move(String::from()->x) }
-    let y = x; // !{ Move(x->y) }
-    println!("{}", y); // print to stdout!
-} /* !{
-    GoOutOfScope(x),
-    GoOutOfScope(y)
-} */
+Format: <event_name>(<from>-><to>)
+  Bsp.: // !{ PassByMutableReference(a->Some_Function()), ... }
 ```
-Each Event is defined on the line where it occurs and within delimiters `!{` and `}`.
-> Events can be annotated within block comments; however, the block **_must_** start on the line in which the events occur. Additionally, all Events within a `!{}` delimitation **_must_** be separated by a singular comma and must each follow the format:
+> Bemerkungen:
+> <ol>
+> <li><code>GoOutOfScope</code>, <code>InitRefParam</code> und <code>InitOwnerParam</code> benötigen nur den <code>from</code> Parameter. Bsp.: <code>// !{ GoOutOfScope(x) }</code></li>
+> <li>Der <code>None</code> Typ kann als <code>to</code> Parameter verwendet werden um z.B. die Rückgabe an den Funktionsaufrufer zu signalisieren. Bsp.: <code>// !{ Move(a->None) }</code></li>
+> <li>Allen Verwendungen von <code>Struct</code>-Feldern muss der Name der übergeordneten Structs vorangestellt werden. Bsp.: <code>a.b = 1; // !{ Bind(a.b) }</code> wobei <code>a</code> das übergeordnete Struct und <code>b</code> das Feld ist</li>
+> </ol>
 
-```rust
-ExternalEvents Usage:
-    Format: <event_name>(<from>-><to>)
-        e.g.: // !{ PassByMutableReference(a->Some_Function()), ... }
-    Note: GoOutOfScope and InitRefParam require only the <from> parameter
-        e.g.: // !{ GoOutOfScope(x) }
-```
-> Refer to the [Appendix](#Appendix) for a list of usable `ExternalEvent`'s.
+| Mögliche Events                  | Beschreibung                                                                                                                                                                                                                                                                 |
+|:---------------------------------| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Bind(a)`                        | Bindung per `let` oder Zuweisung. <br>Bsp.: `let a = 1;                                                                                                                                                                                                                      |
+| `Copy(a->b)`                     | Kopiert die Ressource von `a` zu `b`. Hierbei implementiert `a` das `Copy`-Trait.                                                                                                                                                                                            |
+| `Move(a->b)`                     | Verschiebt die Ressource von `a` zu `b`. Hierbei implementiert `a` das `Move`-Trait. <br>Hinweis: Das Verschieben an `None` (z.B.: `Move(a -> None)`) drückt ein Verschieben an die aufrufende Funktion aus. Bsp.: Rückgabe des per `Move(a -> fn())` erhaltenen Ownerships. |
+| `StaticBorrow(a->b)`             | Weist `b` einer unveränderlichen Referenz auf `a` zu. Bsp.: `let b = &a;`                                                                                                                                                                                                    |
+| `MutableBorrow(a->b)`            | Weist `b` einer veränderlichen Referenz auf `a` zu. <br>e.g.: `let b = &mut a;`                                                                                                                                                                                              |
+| `StaticDie(a->b)`                | Beendet die nicht-lexikalische Lebensdauer der Referenzvariablen `a` und gibt die Ressource an ihren Besitzer `b` zurück.                                                                                                                                                    |
+| `MutableDie(a->b)`               | Beendet die nicht-lexikalische Lebensdauer der Referenzvariablen `a` und gibt die Ressource an ihren Besitzer `b` zurück.                                                                                                                                                    |
+| `PassByStaticReference(a->b())`  | Übergibt eine unveränderliche Referenz auf die Variable `a` an die Funktion `b()`. Nicht mit `StaticBorrow` zu verwechseln.                                                                                                                                                  |
+| `PassByMutableReference(a->b())` | Übergibt eine veränderliche Referenz auf die Variable `a` an die Funktion `b()`. Nicht mit `MutableBorrow` zu verwechseln.                                                                                                                                                   |
+| `GoOutOfScope(a)`                | Beendet die lexikalische Lebensdauer der Variable `a`.                                                                                                                                                                                                                       |
+| `InitOwnerParam(a)`              | Initialisiert den Parameter `a` einer Funktion, der Owner der Ressource ist. Bsp.: `fn(a: String) {..}`<br>                                                                                                                                                                  |
+| `InitRefParam(a)`                | Initialisiert den Parameter `a` einer Funktion, der eine Referenz auf die Ressource ist. Bsp.: `fn(a: &String) {..}`<br>                                                                                                                                                     |
 
-Phew! All that's left is running the program. Simply navigate into [src](src) and run:
-```shell
-cargo run string_from_move_print
-```
-Now your folder should look like this:
-```
-string_from_move_print
-├── input
-│   └── annotated_source.rs
-├── main.rs
-├── source.rs
-├── vis_code.svg
-└── vis_timeline.svg
-```
-Congratulations! You have successfully generated your first visualization! As a last step, add the name of your example to `targetExamples` under [view_examples.sh](rustviz_mdbook/view_examples.sh) and run the script from [rustviz_mdbook](rustviz_mdbook) to see it in your browser.
+## Einschränkungen der Visualisierungen
+- Verzweigungslogik
+- Looping
+- explizite Lebensdaueranmerkung
 
-## Appendix
-
-**`ExternalEvent` Usage:**
-| Event |   Usage   |
-| :---  |   :----   |
-| `Bind(a)` | Let binding or assignment.<br>e.g.: `let a = 1;` |
-| `Copy(a->b)` | Copies the resource of `a` to variable `b`. Here, `a` implements the `Copy` trait. |
-| `Move(a->b)` | Moves the resource of `a` to variable `b`. Here, `a` implements the `Move` trait.<br>Note: Moving to `None` (i.e.: `Move(a->None)`) is used to express a move to the caller function. |
-| `StaticBorrow(a->b)` | Assigns an immutable reference of `a` to `b`.<br>e.g.: `let b = &a;` |
-| `MutableBorrow(a->b)` | Assigns a mutable reference of `a` to `b`.<br>e.g.: `let b = &mut a;` |
-| `StaticDie(a->b)` | Ends the non-lexical lifetime of the reference variable `a` and returns the resource back to its owner `b`. |
-| `MutableDie(a->b)` | Ends the non-lexical lifetime of the reference variable `a` and returns the resource back to its owner `b`. |
-| `PassByStaticReference(a->b)` | Passes an immutable reference of variable `a` to function `b`. Not to be confused with StaticBorrow. |
-| `PassByMutableReference(a->b)` | Passes a mutable reference of variable `a` to function `b`. Not to be confused with MutableBorrow. |
-| `GoOutOfScope(a)` | Ends the lexical lifetime of variable `a`. |
-| `InitRefParam(a)` | Initializes the parameter `a` of some function, which is a reference.<br>e.g.: `some_fn(a: &String) {..}` |
-| `InitOwnerParam(a)` | Initializes the parameter `a` of some function, which owns the resource.<br>e.g.: `some_fn(a: String) {..}` |
-
-> Note:
-> 1. `GoOutOfScope`, `InitRefParam` and `InitOwnerParam` require a singular parameter previously defined in the `Variable Definitions` section.
-(e.g.: `// !{ GoOutOfScope(x) }`)
-> 2. All other events require two parameters, `a` and `b`, which can either be defined (e.g.: `Owner a`) or undefined (`None`).
-<!-- The `None` option is generally used for scalar types or undefined variables (e.g.: `let x = 1` can be annotated as `Bind(x)`).  -->
-The `None` type can be used as the `<to>` parameter (e.g.: `Move(a->None)`) to specify a move to the function caller.
-> 3. All uses of `Struct` fields must be preceded by its parent struct's name. (e.g.: `a.b = 1;` can be annotated as `Move(None->a.b)`, where `a` is the parent and `b` is the field.)
-
-## Visualization Limitations
-
-Some features are still being built. As of now, we are limited to:
-- No branching logic
-- No looping
-- No explicit lifetime annotation
+## Probleme
+Es kommt immer wieder zu inkonsitentem Verhalten und die Annotationen werden nicht automatisiert angelegt. Dies führt dazu, dass man sich bereits mit der Thematik des Ownerships und Borrowing auskennen muss um diese visualisieren zu können.
+Zudem gibt es Probleme beim erkennen von StaticRef und MutableRef. Diese werden meist bei der Generierung der Variablen Definition als Owner angegeben, was zu einer falschen Visualisierung führt.
