@@ -43,8 +43,7 @@ set targetExamples=^
         struct_rect2 ^
         struct_string ^
         extra_credit ^
-        beispiel1 ^
-        test
+        beispiel1
 
 set EX=..\src\examples
 rem Loop through the specified examples
