@@ -14,7 +14,7 @@ Näheres dazu ist nochmal in dem zugehörigen [VL/HCC 2022 paper](https://web.ee
 <br>
 
 ## Voraussetzungen
-RustViz benötigt eine Instalation von Rust zusammen mit Cargo und mdBook.
+RustViz benötigt eine Instalation von [Rust](https://www.rust-lang.org/) zusammen mit Cargo und mdBook.
 1. [Cargo](https://doc.rust-lang.org/cargo/index.html) ist der Rust-Paketmanager. Cargo lädt die Abhängigkeiten der Rust-Pakets herunter, kompiliert die Pakete, erstellt verteilbare Pakete und lädt sie auf crates.io, die Paketregistrierung der Rust-Community, hoch.
 2. [mdBook](https://github.com/rust-lang/mdBook) ist ein Kommandozeilenwerkzeug zum Erstellen von Büchern mit Markdown. Es ist ideal für die Erstellung von Produkt- oder API-Dokumentation, Tutorials, Kursmaterialien oder alles, was eine saubere, leicht navigierbare und anpassbare Präsentation erfordert. Näheres dazu ist in der [Dokumentation](https://rust-lang.github.io/mdBook/index.html) von mdBook zu finden.
 <br>
