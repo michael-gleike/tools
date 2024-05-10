@@ -1,0 +1,12 @@
+services:
+  aquascope:
+    build:
+      context: ./aquascope
+      dockerfile: Dockerfile
+    container_name: aquascope
+    ports:
+      - 8080:8080
+    volumes:
+      - type: bind
+        source: ./aquascope/src/examples
+        target: /aquascope/examples
