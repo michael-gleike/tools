@@ -4,7 +4,7 @@ Aquascope ist ein Tool, das interaktive Visualisierungen von Rust-Programmen erz
 
 ## Visualisierung
 Aquascope stellt einen mdBook Präprocessor dar der Aquascope-Diagramme in ein mdBook integriert.
-Das folgende Bild zeigt eine Beispielvisualisierung:
+Das folgende Bild zeigt eine Beispielvisualisierung: <br>
 ![alt tag](https://github.com/michael-gleike/tools/blob/main/aquascope/pictures/example.png)
 
 
