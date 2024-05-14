@@ -13,4 +13,4 @@ cargo clippy --help
 ````
 
 ## Ownership und Borrowing
-Clippy verwendet zum Testen von Ownership und Borrowing ``cargo check``. Somit sind die Einschränkungen der beiden Cargo Subcommands hier gleich. Genaueres dazu im Kapitel zu cargo check.
+Clippy verwendet zum Testen von Ownership und Borrowing ``cargo check``. Somit sind die Einschränkungen der beiden Cargo Subcommands hier gleich. Genaueres dazu im Kapitel zu [cargo check](https://github.com/michael-gleike/tools/blob/main/cargo_check/README.md).
