@@ -47,6 +47,10 @@ Cargo check verwendet nur den rust borrow checker und stellt somit keine Erweite
 2. cargo check gibt einem nur die Informationen die cargo build ebenfalls findet. Da es sich dabei jeweils um Kommandozeilen-Tools handelt werden diese Fehler nicht grafisch visualisiert und es gibt kein Syntax highlighting der fehlerhaften Stelle.
 3. cargo check verwendet den rust Borrow Checker. Dieser findet zwar viele Fehler, jedoch werden vor allem manche zyklischen Referenzen nicht als solche erkannt. Somit kann es zu einem Speicherleck trotz check kommen. Ein Beispiel hierfür wäre die folgende Funktion:
     ````rust
+        enum Cons<T> {
+          Nil,
+          Cons(T, RefCell<Rc<Cons<T>>>),
+        }
        fn leak() {
            let a = Rc::new(Cons(5, RefCell::new(Rc::new(Nil))));
         
