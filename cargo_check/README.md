@@ -51,6 +51,7 @@ Cargo check verwendet nur den rust borrow checker und stellt somit keine Erweite
           Nil,
           Cons(T, RefCell<Rc<Cons<T>>>),
         }
+    
        fn leak() {
            let a = Rc::new(Cons(5, RefCell::new(Rc::new(Nil))));
         
