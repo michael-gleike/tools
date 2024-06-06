@@ -86,8 +86,7 @@ Aufgrund mangelnder Dokumentation der Annotation und generellen Bedienung des To
                |                    - immutable borrow later used here
             
         ````
-    - Aus der unter Visualisierung beschriebenen Codeannotation können manchmal solche Fehler abgelesen werden, jedoch benötigt es dafür viel Geduld. Oft gelingt dies aber gar nicht.
+    - Aus der unter Visualisierung beschriebenen Codeannotation können manchmal solche Fehler abgelesen werden, jedoch benötigt es dafür viel Geduld.
     - Es werden nicht immer alle Codezeilen im Playground annotiert. Manchmal wird aber auch die Annotation mehrerer Zeilen zusammengefasst. Dies macht es unübersichtlich oder oft auch einfach unverständlich.
-    - Die Art der Codeannotationen kann für Anfänger sehr Verwirrend sein und trägt nicht unbedingt dazu bei, die Ownership-Verhältnisse zu verstehen.
 3. Fazit <br>
 Das Tool bringt durchaus Vorteile gegenüber einer reinen Shell basierten Fehlerauswertung, jedoch überwiegen im momentanen Zustand klar die Nachteile. Da das Tool aber noch aktiv entwickelt wird, kann es durchaus sein, dass diese Probleme in zukünftigen Versionen behoben werden.
