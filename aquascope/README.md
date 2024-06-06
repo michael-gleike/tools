@@ -47,8 +47,7 @@ Aufgrund mangelnder Dokumentation der Annotation und generellen Bedienung des To
                 let _x = *n;
             }
         ````
-        > Aquascope erkennt hier erst einen Fehler bei <code>let _x = *n;</code>, jedoch passiert der erste Fehler schon eine Zeile früher bei <code>v.push(0);</code> da <code>v</code> hier mutable borrowed wird aber davor bereits immutable borrowed wurde und dies Regeln für Ownership und Borrowing verletzt.<br>
-        Vom Borrow-Checker gefundener Fehler:
+        > Aquascope erkennt hier erst einen Fehler bei <code>let _x = *n;</code>, jedoch passiert der erste Fehler schon eine Zeile früher bei <code>v.push(0);</code> da <code>v</code> hier mutable borrowed wird aber davor bereits immutable borrowed wurde und dies Regeln für Ownership und Borrowing verletzt.<br>Vom Borrow-Checker gefundener Fehler:
         ````shell
             error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable
              --> src/main.rs:4:3
@@ -74,7 +73,7 @@ Aufgrund mangelnder Dokumentation der Annotation und generellen Bedienung des To
              println!("{}", y);
         }
         ````
-        > Vom Borrow-Checker gefundener Fehler:
+        > Aquascope erkennt in diesem Code keinen Ownership oder Borrowing Fehler<br>Vom Borrow-Checker gefundener Fehler:
         ````shell
             error[E0502]: cannot borrow `*a` as mutable because it is also borrowed as immutable
               --> src/main.rs:12:5
