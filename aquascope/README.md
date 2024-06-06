@@ -38,22 +38,44 @@ Aufgrund mangelnder Dokumentation der Annotation und generellen Bedienung des To
 1. Vorteile
     - Zumindest im Playground findet alles komplett automatisiert statt.
 2. Probleme
+    - Manche Fehler werden nicht richtig oder erst zu spät erkannt. Beispiel:
+        ````rust
+            fn main() {
+                let mut v = vec![1, 2, 3];
+                let n = &v[0];
+                v.push(0);
+                let _x = *n;
+            }
+        ````
+        > Aquascope erkennt hier erst einen Fehler bei <code>let _x = *n;</code>, jedoch passiert der erste Fehler schon eine Zeile früher bei <code>v.push(0);</code> da <code>v</code> hier mutable borrowed wird aber davor bereits immutable borrowed wurde und dies Regeln für Ownership und Borrowing verletzt.<br>
+        Vom Borrow-Checker gefundener Fehler:
+        ````shell
+            error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable
+             --> src/main.rs:4:3
+              |
+            3 |   let n = &v[0];
+              |            - immutable borrow occurs here
+            4 |   v.push(0);
+              |   ^^^^^^^^^ mutable borrow occurs here
+            5 |   let _x = *n;
+              |            -- immutable borrow later used here
+        ````
     - In der Stack-Darstellung werden momentan nicht alle Ownership-Fehler gefunden/dargestellt die der Rust-Borrow-Checker findet. Beispiel:
         ````rust
         fn main() {
-          let mut a = 1;
-          foo(&mut a);
+            let mut a = 1;
+            foo(&mut a);
         }
         
         fn bar(x: &mut i32) {}
         fn foo(a: &mut i32) {
-            let y = &a;
-            bar(a);
-            println!("{}", y);
+             let y = &a;
+             bar(a);
+             println!("{}", y);
         }
         ````
-         > Vom Borrow-Checker gefundener Fehler:
-         ````shell
+        > Vom Borrow-Checker gefundener Fehler:
+        ````shell
             error[E0502]: cannot borrow `*a` as mutable because it is also borrowed as immutable
               --> src/main.rs:12:5
                |
@@ -64,7 +86,7 @@ Aufgrund mangelnder Dokumentation der Annotation und generellen Bedienung des To
             13 |     println!("{}", y);
                |                    - immutable borrow later used here
             
-         ````
+        ````
     - Aus der unter Visualisierung beschriebenen Codeannotation können manchmal solche Fehler abgelesen werden, jedoch benötigt es dafür viel Geduld. Oft gelingt dies aber gar nicht.
     - Es werden nicht immer alle Codezeilen im Playground annotiert. Manchmal wird aber auch die Annotation mehrerer Zeilen zusammengefasst. Dies macht es unübersichtlich oder oft auch einfach unverständlich.
     - Die Art der Codeannotationen kann für Anfänger sehr Verwirrend sein und trägt nicht unbedingt dazu bei, die Ownership-Verhältnisse zu verstehen.
