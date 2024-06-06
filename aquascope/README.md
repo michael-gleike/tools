@@ -8,19 +8,14 @@ Das folgende Bild zeigt eine Beispielvisualisierung: <br>
 ![alt tag](https://github.com/michael-gleike/tools/blob/main/aquascope/pictures/example.png)
 
 
-#### Bedeutung
-- ![initialize.png](pictures/notation/initialize.png) Die Variable wird in dieser Zeile initialisiert.
-- ![drop.png](pictures/notation/drop.png) Die Variable wird nach dieser Zeile nicht mehr verwendet.
-- ![borrow.png](pictures/notation/borrow.png) Die Resource wird in dieser Zeile geborrowed.
-- ![gainRead.png](pictures/notation/gainRead.png) Die Variable hatte bisher keine Read-Berechtigung erhällt diese aber in dieser Zeile.
-- ![read.png](pictures/notation/read.png) Die Variable hatte bereits Read-Berechtigungen und es findet keine Änderung daran statt.
-- ![dropRead.png](pictures/notation/dropRead.png) Die Variable hatte zuvor Read-Berechtigungen, aber verliert diese jetzt.
-- ![noWrite.png](pictures/notation/noWrite.png) Die Variable hatte bisher keine Write-Berechtigung und es findet keine Änderung daran statt.
-- ![gainWrite.png](pictures/notation/gainWrite.png) Die Variable hatte bisher keine Write-Berechtigung erhällt diese aber in dieser Zeile.
-- ![dropWrite.png](pictures/notation/dropWrite.png) Die Variable hatte zuvor Write-Berechtigungen, aber verliert diese jetzt.
-- ![noOwner.png](pictures/notation/noOwner.png) Die Variable hatte bisher kein Ownership über die Resource und es findet keine Änderung daran statt.
-- ![gainOwner.png](pictures/notation/gainOwner.png) Die Variable hatte bisher kein Ownership über die Resource erhällt dies aber in dieser Zeile.
-- ![dropOwner.png](pictures/notation/dropOwner.png) Die Variable hatte zuvor Ownership über die Resource, aber verliert dies jetzt.
+#### Symbol-Bedeutungen
+|                Kategorien                | Typen                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|:----------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|            Read-Berechtigung             | ![gainRead.png](pictures/notation/gainRead.png) Die Variable hatte bisher keine Read-Berechtigung erhällt diese aber in dieser Zeile.<br>![read.png](pictures/notation/read.png) Die Variable hatte bereits Read-Berechtigungen und es findet keine Änderung daran statt.<br>![dropRead.png](pictures/notation/dropRead.png) Die Variable hatte zuvor Read-Berechtigungen, aber verliert diese jetzt.                                      |
+|            Write-Berechtigung            | ![noWrite.png](pictures/notation/noWrite.png) Die Variable hatte bisher keine Write-Berechtigung und es findet keine Änderung daran statt. <br>![gainWrite.png](pictures/notation/gainWrite.png) Die Variable hatte bisher keine Write-Berechtigung erhällt diese aber in dieser Zeile. <br>![dropWrite.png](pictures/notation/dropWrite.png) Die Variable hatte zuvor Write-Berechtigungen, aber verliert diese jetzt.                    |
+|            Owner-Berechtigung            | ![noOwner.png](pictures/notation/noOwner.png) Die Variable hatte bisher kein Ownership über die Resource und es findet keine Änderung daran statt.<br>![gainOwner.png](pictures/notation/gainOwner.png) Die Variable hatte bisher kein Ownership über die Resource erhällt dies aber in dieser Zeile.<br>![dropOwner.png](pictures/notation/dropOwner.png) Die Variable hatte zuvor Ownership über die Resource, aber verliert dies jetzt. |
+| Gründe für ein<br> Berechtigungsänderung | ![initialize.png](pictures/notation/initialize.png) Die Variable wird in dieser Zeile initialisiert.<br>![drop.png](pictures/notation/drop.png) Die Variable wird nach dieser Zeile nicht mehr verwendet.<br>![borrow.png](pictures/notation/borrow.png) Die Resource wird in dieser Zeile geborrowed.<br>![regainBorrow.png](pictures/notation/regainBorrow.png) Die Resource erhällt in dieser Zeile ihre Berechtigungen zurück.         |
+|        Erwartete Berechtigungen          | ![expectRead.png](pictures/notation/expectRead.png) Es wird vor erwartet, dass die Ressource vor dem Funktionsaufruf die Read-Berechtigung hält.<br>![expectWrite.png](pictures/notation/expectWrite.png) Es wird vor erwartet, dass die Ressource vor dem Funktionsaufruf die Write-Berechtigung hält.                                                                                                                                    |
 
 ## Installation
 Die Installation ist momentan nur bedingt möglich. Zudem funktioniert das Tool momentan nur auf Linux-Systemen. Die momentan aktuellste Version, die sich installieren lässt ist ``v0.3.1``.
