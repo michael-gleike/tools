@@ -1,5 +1,5 @@
 # Aquascope
-Aquascope ist ein Tool, das interaktive Visualisierungen von Rust-Programmen erzeugt. Diese Visualisierungen zeigen das Kompilierungs- und Laufzeit-Verhalten von Rust Programmen.
+Aquascope ist ein Tool, das interaktive Visualisierungen von Rust-Programmen erzeugt. Diese größtenteils automatisch generierten Visualisierungen zeigen das Kompilierungs- und Laufzeit-Verhalten von Rust Programmen.
 <br>
 
 ## Visualisierung
@@ -36,7 +36,7 @@ Um die Installation zu erleichtern wird ein Dockercontainer bereitgestellt.
 ## Benutzung
 Die einfachste Möglichkeit Aquascope zu verwenden ist der zugehörige [Playground](https://cognitive-engineering-lab.github.io/aquascope/).
 
-Um Aquascope bei einer lokalen Installation verwenden zu können muss zuerst (falls noch nicht geschehen) in dem jeweiligen Projekt ein [mdbook](https://rust-lang.github.io/mdBook/) erstellt werden:
+Um Aquascope bei einer lokalen Installation verwenden zu können muss zuerst (falls noch nicht geschehen) in dem jeweiligen Projekt ein [mdBook](https://rust-lang.github.io/mdBook/) erstellt werden:
 ````shell
 ~/project$ mdbook init <book-name>
 ````
@@ -55,7 +55,7 @@ let x = *n;`[]`
 #}
 ```
 ````
-Die Visualisierung lässt sich dann mit der Ausführung der folgenden Befehle im mdbook-Ordner generieren:
+Die Visualisierung lässt sich dann mit der Ausführung der folgenden Befehle im mdBook-Ordner generieren:
 ````shell
 mdbook build
 mdbook serve
