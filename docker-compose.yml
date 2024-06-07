@@ -5,8 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: aquascope
     ports:
-      - 8080:8080
+      - 3000:3000
     volumes:
       - type: bind
-        source: ./aquascope/src/examples
-        target: /aquascope/examples
+        source: ./aquascope/markdowns
+        target: /aquascope/src

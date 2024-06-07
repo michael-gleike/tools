@@ -4,7 +4,6 @@ ENV BOOK_DIR=aquascope-book
 
 RUN cargo install mdbook
 
-COPY entrypoint.sh /aquascope/
 WORKDIR /aquascope
 RUN cargo install mdbook-aquascope --locked --version 0.3.1
 RUN rustup toolchain install nightly-2023-08-25 -c rust-src rustc-dev llvm-tools-preview miri
@@ -17,6 +16,7 @@ RUN echo "" >> book.toml && \
     grep -q "/[preprocessor.aquascope]/d" book.toml || echo "#book.toml" >>book.toml && echo "[preprocessor.aquascope]" >> book.toml
 
 WORKDIR /aquascope
+COPY entrypoint.sh /aquascope/
 CMD [ "sh", "-c", "/aquascope/entrypoint.sh ${CMDARGS}" ]
 
 
