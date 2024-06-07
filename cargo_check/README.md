@@ -42,7 +42,7 @@ Cargo check verwendet nur den rust borrow checker und stellt somit keine Erweite
 - [E0713:](https://doc.rust-lang.org/error_codes/E0713.html) This error occurs when an attempt is made to borrow state past the end of the lifetime of a type that implements the `Drop` trait.
 - [E0716:](https://doc.rust-lang.org/error_codes/E0716.html) A temporary value is being dropped while a borrow is still in active use.
 
-### Konkrete Probleme
+### Evaluierung
 1. cargo check gibt nicht immer alle Fehler auf einmal an. Somit kann es ratsam sein, nach dem Beheben der Fehler erneut cargo check anzuwenden.
 2. cargo check gibt einem nur die Informationen die cargo build ebenfalls findet. Da es sich dabei jeweils um Kommandozeilen-Tools handelt werden diese Fehler nicht grafisch visualisiert und es gibt kein Syntax highlighting der fehlerhaften Stelle.
 3. cargo check verwendet den rust Borrow Checker. Dieser findet zwar viele Fehler, jedoch werden vor allem manche zyklischen Referenzen nicht als solche erkannt. Somit kann es zu einem Speicherleck trotz check kommen. Ein Beispiel hierfür wäre die folgende Funktion:
