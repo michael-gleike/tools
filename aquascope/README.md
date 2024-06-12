@@ -1,5 +1,5 @@
 # Aquascope
-Aquascope ist ein Tool, das interaktive Visualisierungen von Rust-Programmen erzeugt. Diese größtenteils automatisch generierten Visualisierungen zeigen das Kompilierungs- und Laufzeit-Verhalten von Rust Programmen.
+[Aquascope](https://github.com/cognitive-engineering-lab/aquascope) ist ein Tool, das interaktive Visualisierungen von Rust-Programmen erzeugt. Diese größtenteils automatisch generierten Visualisierungen zeigen das Kompilierungs- und Laufzeit-Verhalten von Rust Programmen.
 <br>
 
 ## Visualisierung
@@ -84,7 +84,7 @@ mdbook serve
    | `` `(...)` `` | Mit dieser Annotation am Zeilenende lässt sich das Anzeigeverhalten der Stepper-Boxen anpassen. Dabei wird zwischen drei unique keys unterschieden, welche durch `,` und ohne Leerzeichen voneinander getrennt werden.<br><br> <ul><li>`focus`: Nur Zeilen die mit diesem Key annotiert sind zeigen in der Ausgabe die Stepper-Box an. Wenn keine Zeilen damit annotiert sind werden Alle angezeigt.</li><li>`paths`: Nur die Variable die mit diesem Key gekennzeichnet ist (Beispiel: `` `(paths:x)` ``) wird in der Stepper-Box per default angezeigt. Alle anderen Variablen sind dann in einem ausklappbaren Menü verborgen.</li><li>`rxpaths`: Ist von der Funktionalität gleich wie der Key `paths`, nur das der String hinter dem `:` hierbei als Regex evaluiert wird. Somit ist hiermit eine Auswahl mehrerer Variablen möglich.</li></ul><br>Benötigt die `stepper` und `permissions` Blockannotation.<br>Beispiel: `` let n = &v[0];`(focus,paths:v)` `` |
 
 ### Verwendung des Docker Containers
-Zum Erstellen der Visualisierung mithilfe des Docker Containers müssen die Markdown Quell-Files mit den annotierte Aquascope-Codeblöcken im Ordner `./tools/aquascope/markdowns` oder einem beliebigen Unterordner abgelegt werden und danach der folgende Befehl ausgeführt werden.
+Zum Erstellen der Visualisierung mithilfe des Docker Containers müssen die Markdown Quell-Files mit den annotierte Aquascope-Codeblöcken im Ordner [/tools/aquascope/markdowns](markdowns) oder einem beliebigen Unterordner abgelegt werden und danach der folgende Befehl ausgeführt werden.
 ````shell
 docker compose up aquascope
 ````
