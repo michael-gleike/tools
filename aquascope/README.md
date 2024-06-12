@@ -18,15 +18,15 @@ Das folgende Bild zeigt eine Beispielvisualisierung: <br>
 <br>
 
 ## Installation
-Die Installation ist momentan nur bedingt möglich. Zudem funktioniert das Tool momentan nur auf Linux-Systemen. Die momentan aktuellste Version, die sich installieren lässt, ist ``v0.3.1``.
+Die Installation des Tools ist momentan nur auf Linux-Systemen möglich. Die momentan neuste Version lässt sich wie folgt installieren:
 ````shell
 cargo install mdbook
-cargo install mdbook-aquascope --locked --version 0.3.1
+cargo install mdbook-aquascope --locked --version 0.3.2
 rustup toolchain install nightly-2023-08-25 -c rust-src rustc-dev llvm-tools-preview miri
-cargo +nightly-2023-08-25 install aquascope_front --git https://github.com/cognitive-engineering-lab/aquascope --tag v0.3.1 --locked
+cargo +nightly-2023-08-25 install aquascope_front --git https://github.com/cognitive-engineering-lab/aquascope --tag v0.3.2 --locked
 cargo +nightly-2023-08-25 miri setup
 ````
-Die Installation from Source bietet dabei nur den Vorteil den [Playground](https://cognitive-engineering-lab.github.io/aquascope/) lokal laufen lassen zu können. Dieser lässt sich aber in der Version ``v0.3.1`` nicht bauen. Somit wird diese Installationsform hier nicht beleuchtet.
+Die zweite Installationsmöglichkeit "from Source" bietet gegenüber der resten Möglichkeit nur den Vorteil den [Playground](https://cognitive-engineering-lab.github.io/aquascope/) lokal laufen lassen zu können. Dieser lässt sich aber in der momentan aktuellsten Version ``v0.3.2`` nicht bauen. Somit wird diese Installationsform hier nicht beleuchtet.
 Um die Installation zu erleichtern wird ein Dockercontainer bereitgestellt.
 ````shell
 ~/tools$ docker compose up aquascope
@@ -147,4 +147,4 @@ docker compose up aquascope
     - Aus der unter Visualisierung beschriebenen Codeannotation können manchmal solche Fehler abgelesen werden, jedoch benötigt es dafür viel Geduld und gegebenenfalls Vorwissen zu der Thematik.
     - Es werden nicht immer alle Codezeilen im Playground annotiert. Manchmal wird aber auch die Annotation mehrerer Zeilen zusammengefasst. Dies macht es unübersichtlich oder oft auch einfach unverständlich.
 3. Fazit <br>
-Das Tool bringt durchaus Vorteile gegenüber einer reinen Shell basierten Fehlerauswertung, jedoch überwiegen im momentanen Zustand klar die Nachteile. Da das Tool aber noch aktiv entwickelt wird, kann es durchaus sein, dass diese Probleme in zukünftigen Versionen behoben werden.
+Das Tool bringt durchaus Vorteile gegenüber einer reinen Shell basierten Fehlerauswertung, jedoch ist im momentanen Zustand keine zuverlässliche Fehlerdiagnose mit dem Tool möglich. Das Tool kann aber trotzdem zum besseren Verständnis von Ownership und Borrowing eingesetzt werden. Da das Tool aber noch aktiv entwickelt wird, kann es durchaus sein, dass diese Probleme in zukünftigen Versionen behoben werden.

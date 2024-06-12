@@ -1,6 +1,6 @@
 # Aquascope fails to indicate the problem
 
-```aquascope,interpreter+permissions,stepper,boundaries,shouldFail,horizontal
+```aquascope,interpreter+permissions,shouldFail,stepper,boundaries
 fn main() {
     let mut a = 1;`[]`
     foo(&mut a);`[]`

@@ -17,7 +17,7 @@ RUN echo "" >> book.toml && \
 
 WORKDIR /aquascope
 COPY entrypoint.sh /aquascope/
-CMD [ "sh", "-c", "/aquascope/entrypoint.sh ${CMDARGS}" ]
+ENTRYPOINT [ "/aquascope/entrypoint.sh" ]
 
 
 

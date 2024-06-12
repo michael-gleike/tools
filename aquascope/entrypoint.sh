@@ -42,6 +42,7 @@ done
 
 cd $BOOK_DIR
 echo Serving on: http://localhost:3000/
+mdbook build > output.log 2>&1
 mdbook serve -n 0.0.0.0 > output.log 2>&1
 
 tail -f /dev/null

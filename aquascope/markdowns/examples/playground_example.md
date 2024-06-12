@@ -1,6 +1,6 @@
 # Aquascope playground example
 
-```aquascope,interpreter+permissions,stepper,boundaries,shouldFail,horizontal
+```aquascope,interpreter+permissions,shouldFail,stepper,boundaries
 #fn main() {
 let mut v = vec![1, 2, 3];
 let n = &v[0];`[]`
