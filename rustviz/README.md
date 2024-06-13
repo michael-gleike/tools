@@ -8,7 +8,7 @@ Diese Seminararbeit beschäftigt sich mit der Vorstellung des Tools und einer ge
 
 ## Was macht RustViz?
 *RustViz* erzeugt [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG)-Dateien durch vom Benutzer annotierten Source Code mit grafischen Indikatoren, die mit [mdBook](https://github.com/rust-lang/mdBook) integriert werden können, um interaktive Visualisierungen von Eigentums- und Ausleihvorgängen in einem Rust-Programm zu erstellen. Hier ist eine Beispielansicht, wie eine Visualisierung aussehen kann:
-![alt tag](https://github.com/michael-gleike/tools/blob/main/rustviz/src/svg_generator/example.png)
+![alt tag](src/svg_generator/example.png)
 
 Näheres dazu ist nochmal in dem zugehörigen [VL/HCC 2022 paper](https://web.eecs.umich.edu/~comar/rustviz-vlhcc22.pdf) beschrieben.
 <br>
