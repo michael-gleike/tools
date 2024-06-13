@@ -8,13 +8,13 @@ Das folgende Bild zeigt eine Beispielvisualisierung: <br>
 ![alt tag](pictures/example.png)
 
 #### Symbol-Bedeutungen
-|                Kategorien                | Typen                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-|:----------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|            Read-Berechtigung             | ![gainRead.png](pictures/notation/gainRead.png) Die Variable hatte bisher keine Read-Berechtigung erhällt diese aber in dieser Zeile.<br>![read.png](pictures/notation/read.png) Die Variable hatte bereits Read-Berechtigungen und es findet keine Änderung daran statt.<br>![dropRead.png](pictures/notation/dropRead.png) Die Variable hatte zuvor Read-Berechtigungen, aber verliert diese jetzt.                                                                   |
-|            Write-Berechtigung            | ![noWrite.png](pictures/notation/noWrite.png) Die Variable hatte bisher keine Write-Berechtigung und es findet keine Änderung daran statt. <br>![gainWrite.png](pictures/notation/gainWrite.png) Die Variable hatte bisher keine Write-Berechtigung erhällt diese aber in dieser Zeile. <br>![dropWrite.png](pictures/notation/dropWrite.png) Die Variable hatte zuvor Write-Berechtigungen, aber verliert diese jetzt.                                                 |
-|            Owner-Berechtigung            | ![noOwner.png](pictures/notation/noOwner.png) Die Variable hatte bisher kein Ownership über die Resource und es findet keine Änderung daran statt.<br>![gainOwner.png](pictures/notation/gainOwner.png) Die Variable hatte bisher kein Ownership über die Resource erhällt dies aber in dieser Zeile.<br>![dropOwner.png](pictures/notation/dropOwner.png) Die Variable hatte zuvor Ownership über die Resource, aber verliert dies jetzt.                              |
-| Gründe für ein<br> Berechtigungsänderung | ![initialize.png](pictures/notation/initialize.png) Die Variable wird in dieser Zeile initialisiert.<br>![drop.png](pictures/notation/drop.png) Die Variable wird nach dieser Zeile nicht mehr verwendet.<br>![borrow.png](pictures/notation/borrow.png) Die Resource wird in dieser Zeile borrowed.<br>![regainBorrow.png](pictures/notation/regainBorrow.png) Die Resource erhällt in dieser Zeile ihre Berechtigungen zurück.                                        |
-|         Erwartete Berechtigungen         | ![expectRead.png](pictures/notation/expectRead.png) Es wird vor erwartet, dass die Ressource vor der durchgeführten Aktion die Read-Berechtigung hält.<br>![expectWrite.png](pictures/notation/expectWrite.png) Es wird vor erwartet, dass die Ressource vor der durchgeführten Aktion die Write-Berechtigung hält.<br>![expectOwner.png](pictures/notation/expectOwner.png) Es wird vor erwartet, dass die Ressource vor der durchgeführten Aktion das Ownership hält. |
+|                Kategorien                | Typen                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|:----------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|            Read-Berechtigung             | ![gainRead.png](pictures/notation/gainRead.png) Die Variable hatte bisher keine Read-Berechtigung erhällt diese aber in dieser Zeile.<br>![read.png](pictures/notation/read.png) Die Variable hatte bereits Read-Berechtigungen und es findet keine Änderung daran statt.<br>![dropRead.png](pictures/notation/dropRead.png) Die Variable hatte zuvor Read-Berechtigungen, aber verliert diese jetzt.                                                                                                                                                                                                                                                                                                                            |
+|            Write-Berechtigung            | ![noWrite.png](pictures/notation/noWrite.png) Die Variable hatte bisher keine Write-Berechtigung und es findet keine Änderung daran statt. <br>![gainWrite.png](pictures/notation/gainWrite.png) Die Variable hatte bisher keine Write-Berechtigung erhällt diese aber in dieser Zeile. <br>![dropWrite.png](pictures/notation/dropWrite.png) Die Variable hatte zuvor Write-Berechtigungen, aber verliert diese jetzt.                                                                                                                                                                                                                                                                                                          |
+|            Owner-Berechtigung            | ![noOwner.png](pictures/notation/noOwner.png) Die Variable hatte bisher kein Ownership über die Resource und es findet keine Änderung daran statt.<br>![gainOwner.png](pictures/notation/gainOwner.png) Die Variable hatte bisher kein Ownership über die Resource erhällt dies aber in dieser Zeile.<br>![dropOwner.png](pictures/notation/dropOwner.png) Die Variable hatte zuvor Ownership über die Resource, aber verliert dies jetzt.                                                                                                                                                                                                                                                                                       |
+| Gründe für ein<br> Berechtigungsänderung | ![initialize.png](pictures/notation/initialize.png) Die Variable wird in dieser Zeile initialisiert.<br>![drop.png](pictures/notation/drop.png) Die Variable wird nach dieser Zeile nicht mehr verwendet.<br>![borrow.png](pictures/notation/borrow.png) Die Resource wird in dieser Zeile borrowed.<br>![regainBorrow.png](pictures/notation/regainBorrow.png) Die Resource erhällt in dieser Zeile ihre Berechtigungen zurück.                                                                                                                                                                                                                                                                                                 |
+|         Erwartete Berechtigungen         | ![expectReadGranted.png](pictures/notation/expectReadGranted.png) Die Resource hält die erwartete Read-Berechtigung.<br>![expectRead.png](pictures/notation/expectRead.png) Die Resource hält die erwartete Read-Berechtigung nicht.<br>![expectWriteGranted.png](pictures/notation/expectWriteGranted.png) Die Resource hält die erwartete Write-Berechtigung.<br>![expectWrite.png](pictures/notation/expectWrite.png) Die Resource hält die erwartete Write-Berechtigung nicht.<br>![expectOwnerGranted.png](pictures/notation/expectOwnerGranted.png) Die Resource hält die erwartete Write-Berechtigung.<br>![expectOwner.png](pictures/notation/expectOwner.png) Die Resource hält die erwartete Write-Berechtigung nicht. |
 <br>
 
 ## Installation
@@ -96,28 +96,7 @@ docker compose up aquascope
     - Lokale Installation: Auch hier wird die Visualisierung größtenteils automatisch vorgenommen. Es wird zwar eine extra annotation des Codes benötigt, aber meist langt dafür die oben im Beispiel angeführte Standard-Blocknotation.
     - Unausführbarer Code: Aquascope setzt für die Visualisierung nicht voraus, dass der Code kompilierbar ist.
 2. Probleme
-    - Manche Fehler werden nicht richtig oder erst zu spät erkannt. Beispiel:
-        ````rust
-            fn main() {
-                let mut v = vec![1, 2, 3];
-                let n = &v[0];
-                v.push(0);
-                let _x = *n;
-            }
-        ````
-        > Aquascope erkennt hier erst einen Fehler bei <code>let _x = *n; </code>, jedoch passiert der erste Fehler schon eine Zeile früher bei <code>v.push(0); </code> da <code>v</code> hier mutable borrowed wird aber davor bereits immutable borrowed wurde und dies Regeln für Ownership und Borrowing verletzt.<br>Vom Borrow-Checker gefundener Fehler:
-        ````shell
-            error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable
-             --> src/main.rs:4:3
-              |
-            3 |   let n = &v[0];
-              |            - immutable borrow occurs here
-            4 |   v.push(0);
-              |   ^^^^^^^^^ mutable borrow occurs here
-            5 |   let _x = *n;
-              |            -- immutable borrow later used here
-        ````
-    - In der Stack-Darstellung werden momentan nicht alle Ownership-Fehler gefunden/dargestellt die der Rust-Borrow-Checker findet. Beispiel:
+    - Es ist nicht besonders trivial Ownership-Fehler aus der Darstellung von Aquascope abzuleiten. Beispiel:
         ````rust
         fn main() {
             let mut a = 1;
@@ -131,7 +110,7 @@ docker compose up aquascope
              println!("{}", y);
         }
         ````
-        > Aquascope erkennt in diesem Code keinen Ownership- oder Borrowing-Fehler<br>Vom Borrow-Checker gefundener Fehler:
+        > Vom Borrow-Checker gefundener Fehler:
         ````shell
             error[E0502]: cannot borrow `*a` as mutable because it is also borrowed as immutable
               --> src/main.rs:12:5
@@ -144,7 +123,9 @@ docker compose up aquascope
                |                    - immutable borrow later used here
             
         ````
-    - Aus der unter Visualisierung beschriebenen Codeannotation können manchmal solche Fehler abgelesen werden, jedoch benötigt es dafür viel Geduld und gegebenenfalls Vorwissen zu der Thematik.
+        > Das Äquivalent lässt sich aus der Darstellung von Aquascope nur aus der Darstellung der erwarteten Berechtigungen ablesen. Hier ist ein Fehler zu erkennen, da bei <code>bar(a)</code> sowohl die Lese- als auch Schreibberechtigung erwartet wird, aber wie durch den blauen Kreis symbolisiert die Schreibberechtigung nicht gegeben ist.
+    
+        ![ownership_error.png](pictures/ownership_error.png)
     - Es werden nicht immer alle Codezeilen im Playground annotiert. Manchmal wird aber auch die Annotation mehrerer Zeilen zusammengefasst. Dies macht es unübersichtlich oder oft auch einfach unverständlich.
 3. Fazit <br>
-Das Tool bringt durchaus Vorteile gegenüber einer reinen Shell basierten Fehlerauswertung, jedoch ist im momentanen Zustand keine zuverlässliche Fehlerdiagnose mit dem Tool möglich. Das Tool kann aber trotzdem zum besseren Verständnis von Ownership und Borrowing eingesetzt werden. Da das Tool aber noch aktiv entwickelt wird, kann es durchaus sein, dass diese Probleme in zukünftigen Versionen behoben werden.
+Das Tool bietet durch die automatisierte Erkennung und Visualisierung der Berechtigungen durchaus Vorteile gegenüber einer reinen Shell basierten Fehlerauswertung, jedoch ist im momentanen Zustand das Erkennen von Ownership- und Borrowing-Fehlern nicht trivial. Zudem kann es durchaus hilfreich sein sich zum besseren Verständnis zusätzlich die Fehlermeldungen des Borrow-Checkers anzuschauen. Das Tool kann aber trotzdem zum besseren Verständnis von Ownership und Borrowing eingesetzt werden. Da das Tool aber noch aktiv entwickelt wird, kann es durchaus sein, dass die Probleme mit der Darstellung in zukünftigen Versionen behoben werden.
